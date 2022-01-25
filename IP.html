@@ -1,0 +1,162 @@
+<html lang="pl"> 
+<head> 
+<title> Zadanie 1 </title>
+<script>  
+const funkcja = function(){
+    const zmienna1 = String(liczba1.value);
+	const ip =[]; const zero = "0"; const jeden = "1"; const kropka = "."; const dpp = "255"; const dpc = "254";
+	ip[0] = parseInt(zmienna1.split('.')[0]); 
+	ip[1] = parseInt(zmienna1.split('.')[1]); 
+	ip[2] = parseInt(zmienna1.split('.')[2]); 
+	ip[3] = parseInt(zmienna1.split('.')[3]); 
+	for(let i = 0; i < 4; i++){
+		ip[i] = +(ip[i]).toString(2);
+		ip[i] = String(ip[i]);
+		if(ip[i].length < 8){
+			do{
+				ip[i] = zero + ip[i];
+			}while(ip[i].length != 8);
+		}
+	}
+	wynik1.innerHTML="IP binarnie: "+(ip[0]+"."+ip[1]+"."+ip[2]+"."+ip[3]);//+"<br>"+"Binarny: 
+	const maska = parseInt(liczba2.value);
+	var ip_str = ip[0]+kropka+ip[1]+kropka+ip[2]+kropka+ip[3];
+	if(maska == 0){
+		ip_str = "|"+ip_str;
+		wynik2.innerHTML="Maska: "+ip_str;
+		wynik3.innerHTML="Zbyt wiele hostów w sieci";
+	}
+	else if(maska > 0 && maska < 9){
+
+		ip_str = ip_str.slice(0, maska) + "|" + ip_str.slice(maska);
+		var po_linii = ip_str.split('|')[1];
+		po_linii = po_linii.split('.')[0];
+		const dlugosc = po_linii.length;
+		po_linii = "";
+		for(let i = 0; i < dlugosc; i++)
+			po_linii += zero;
+		const adres_sieci = parseInt((ip_str.split('|')[0]+po_linii), 2);
+
+		wynik3.innerHTML="Host min: "+adres_sieci+kropka+zero+kropka+zero+kropka+jeden;
+
+    	var po_linii2 = "";
+    	for(let i = 0; i < dlugosc; i++)
+			po_linii2 += jeden;
+    	const adres_rozgl = parseInt((ip_str.split('|')[0]+po_linii2), 2);
+
+		wynik4.innerHTML="Host maks: "+adres_rozgl+kropka+dpp+kropka+dpp+kropka+dpc;
+
+    	wynik2.innerHTML="Maska: "+ip_str;
+
+	}
+	else if(maska > 8 && maska < 17){
+
+		ip_str = ip_str.slice(0, maska+1) + "|" + ip_str.slice(maska+1);
+		var przed_linia = ip_str.split('|')[0]; 
+		przed_linia = przed_linia.split('.')[1]; 
+		var po_linii = ip_str.split('|')[1];
+		po_linii = po_linii.split('.')[0];
+
+		const dlugosc = po_linii.length;
+		po_linii = "";
+		for(let i = 0; i < dlugosc; i++)
+			po_linii += zero;
+		const adres_sieci = parseInt((przed_linia+po_linii), 2);
+
+		wynik3.innerHTML="Host min: "+zmienna1.split('.')[0]+kropka+adres_sieci+kropka+zero+kropka+jeden;
+
+    	var po_linii2 = "";
+    	for(let i = 0; i < dlugosc; i++)
+			po_linii2 += jeden;
+    	const adres_rozgl = parseInt((przed_linia+po_linii2), 2);
+
+		wynik4.innerHTML="Host maks: "+zmienna1.split('.')[0]+kropka+adres_rozgl+kropka+dpp+kropka+dpc;
+
+    	wynik2.innerHTML="Maska: "+ip_str;
+	}
+	else if(maska > 16 && maska < 25){
+
+		ip_str = ip_str.slice(0, maska+2) + "|" + ip_str.slice(maska+2);
+		var przed_linia = ip_str.split('|')[0]; 
+		przed_linia = przed_linia.split('.')[2]; 
+		var po_linii = ip_str.split('|')[1];
+		po_linii = po_linii.split('.')[0];
+
+		const dlugosc = po_linii.length;
+		po_linii = "";
+		for(let i = 0; i < dlugosc; i++)
+			po_linii += zero;
+		const adres_sieci = parseInt((przed_linia+po_linii), 2);
+
+		wynik3.innerHTML="Host min: "+zmienna1.split('.')[0]+kropka+zmienna1.split('.')[1]+kropka+adres_sieci+kropka+jeden;
+
+    	var po_linii2 = "";
+    	for(let i = 0; i < dlugosc; i++)
+			po_linii2 += jeden;
+    	const adres_rozgl = parseInt((przed_linia+po_linii2), 2);
+
+		wynik4.innerHTML="Host maks: "+zmienna1.split('.')[0]+kropka+zmienna1.split('.')[1]+kropka+adres_rozgl+kropka+dpc;
+
+    	wynik2.innerHTML="Maska: "+ip_str;
+	}
+	else if(maska > 24 && maska < 31){
+		
+		ip_str = ip_str.slice(0, maska+3) + "|" + ip_str.slice(maska+3);
+		var przed_linia = ip_str.split('|')[0]; 
+		przed_linia = przed_linia.split('.')[3]; 
+		var po_linii = ip_str.split('|')[1];
+		po_linii = po_linii.split('.')[0];
+
+		const dlugosc = po_linii.length;
+		po_linii = "";
+		for(let i = 0; i < dlugosc; i++)
+			po_linii += zero;
+		const adres_sieci = parseInt((przed_linia+po_linii), 2) +1;
+
+		wynik3.innerHTML="Host min: "+zmienna1.split('.')[0]+kropka+zmienna1.split('.')[1]+kropka+zmienna1.split('.')[2]+kropka+adres_sieci;
+
+    	var po_linii2 = "";
+    	for(let i = 0; i < dlugosc; i++)
+			po_linii2 += jeden;
+    	const adres_rozgl = parseInt((przed_linia+po_linii2), 2) -1;
+
+		wynik4.innerHTML="Host maks: "+zmienna1.split('.')[0]+kropka+zmienna1.split('.')[1]+kropka+zmienna1.split('.')[2]+kropka+adres_rozgl;
+
+    	wynik2.innerHTML="Maska: "+ip_str;
+	}
+	else if(maska == 31){
+		ip_str = ip_str.slice(0, maska+3) + "|" + ip_str.slice(maska+3);
+		wynik2.innerHTML="Maska: "+ip_str;
+		wynik3.innerHTML="punkt-punkt";
+		wynik4.innerHTML="";
+		wynik4.innerHTML="";
+	}
+	else if(maska == 32){
+		ip_str = ip_str.slice(0, maska+3) + "|" + ip_str.slice(maska+3);
+		wynik2.innerHTML="Maska: "+ip_str;
+		wynik3.innerHTML="To jest pojedynczy host, nie sieć";
+		wynik4.innerHTML="";
+	}
+	else{
+		wynik2.innerHTML="";
+		wynik3.innerHTML="Nieprawidłowa maska";
+		wynik4.innerHTML="";
+	}
+	}
+
+</script>
+</head> 
+<body>
+<h1 style="color:rgb(0, 0, 0);">Kalkulator IP</h1> 
+<form name = "formularz" action = "../../../../Working%20files/Oles%20Pedchenko/Zadania%20na%2018.01.2022/...">
+Podaj IP    <input type="text" id="liczba1"><br><br>
+Podaj maskę <input type="text" id="liczba2"><br>
+</form>
+<input type="button" value="Pokaż" onclick="funkcja()">
+<p id="wynik1"></p>
+<p id="wynik2"></p>
+<p id="wynik3"></p>
+<p id="wynik4"></p>
+
+</body> 
+</html>
