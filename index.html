@@ -1,6 +1,6 @@
 <html lang="pl"> 
 <head> 
-<title> Zadanie 1 </title>
+<title> Kalkulator IP </title>
 <script>  
 const funkcja = function(){
     const zmienna1 = String(liczba1.value);
@@ -18,7 +18,7 @@ const funkcja = function(){
 			}while(ip[i].length != 8);
 		}
 	}
-	wynik1.innerHTML="IP binarnie: "+(ip[0]+"."+ip[1]+"."+ip[2]+"."+ip[3]);//+"<br>"+"Binarny: 
+	wynik1.innerHTML="IP binarnie: "+(ip[0]+"."+ip[1]+"."+ip[2]+"."+ip[3]);
 	const maska = parseInt(liczba2.value);
 	var ip_str = ip[0]+kropka+ip[1]+kropka+ip[2]+kropka+ip[3];
 	if(maska == 0){
